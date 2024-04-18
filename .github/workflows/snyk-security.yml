@@ -47,9 +47,9 @@ jobs:
         with:
           command: monitor
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build a Docker image
-        run: docker build -t demo:latest .
+        run: docker build --file Dockerfile -t demo:latest .
       #- name: Run Snyk to check Docker image for vulnerabilities
       #  continue-on-error: true
       #  uses: snyk/actions/docker@master
