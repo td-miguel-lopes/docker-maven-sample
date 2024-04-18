@@ -42,6 +42,7 @@ jobs:
         with:
           image: demo:latest
           args: --file=Dockerfile
+          command: monitor
       
   
   #snyk:
