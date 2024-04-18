@@ -34,6 +34,15 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build --file Dockerfile -t demo:latest .
+    - name: Run Snyk to check Docker image for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: demo:latest
+          args: --file=Dockerfile
+      
   
   snyk:
     runs-on: ubuntu-latest
