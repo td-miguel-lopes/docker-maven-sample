@@ -45,7 +45,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: monitor    
+          command: monitor
+          args: --target-reference=${{ github.event.repository.name }}
       - name: Build the Docker image
         run: docker build --file Dockerfile -t docker-maven-sample:latest .
       - name: Run Snyk to check Docker image for vulnerabilities
