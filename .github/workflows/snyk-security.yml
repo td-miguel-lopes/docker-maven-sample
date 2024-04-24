@@ -32,17 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:    
       - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build --file Dockerfile -t docker-maven-sample:latest .
-      - name: Run Snyk to check Docker image for vulnerabilities
-        uses: snyk/actions/docker@master
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: docker-maven-sample:latest
-          args: --file=Dockerfile
-          command: monitor
       - name: Set up Snyk CLI to check for security code issues
         uses: snyk/actions/maven-3-jdk-11@master
         continue-on-error: true # To make sure that SARIF upload gets called
@@ -56,8 +45,19 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
+          command: monitor    
+      - name: Build the Docker image
+        run: docker build --file Dockerfile -t docker-maven-sample:latest .
+      - name: Run Snyk to check Docker image for vulnerabilities
+        uses: snyk/actions/docker@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: docker-maven-sample:latest
+          args: --file=Dockerfile
           command: monitor
-  
+      
   #snyk:
   #  runs-on: ubuntu-latest
   #  steps:
