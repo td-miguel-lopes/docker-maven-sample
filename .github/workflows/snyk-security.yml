@@ -43,6 +43,13 @@ jobs:
           image: docker-maven-sample:latest
           args: --file=Dockerfile
           command: monitor
+      - name: Set up Snyk CLI to check for security code issues
+        uses: snyk/actions/maven-3-jdk-11@master
+        continue-on-error: true # To make sure that SARIF upload gets called
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: code test
       - name: Set up Snyk CLI to check for security issues
         uses: snyk/actions/maven-3-jdk-11@master
         continue-on-error: true # To make sure that SARIF upload gets called
