@@ -45,8 +45,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: monitor
-          args: --target-reference=${{ github.event.repository.name }}
+          command: monitor 
+          args: --target-reference=${{ github.event.repository.name }} --all-projects
       - name: Build the Docker image
         run: docker build --file Dockerfile -t docker-maven-sample:latest .
       - name: Run Snyk to check Docker image for vulnerabilities
@@ -59,20 +59,6 @@ jobs:
           args: --file=Dockerfile
           command: monitor
       
-  #snyk:
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - uses: actions/checkout@v3
-  #    - name: Set up Snyk CLI to check for security issues
-        # Snyk can be used to break the build when it detects security issues.
-        # In this case we want to upload the SAST issues to GitHub Code Scanning
-   #     uses: snyk/actions/maven-3-jdk-11@master
-   #     continue-on-error: true # To make sure that SARIF upload gets called
-   #     env:
-          # This is where you will need to introduce the Snyk API token created with your Snyk account
-    #      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-    #    with:
-    #      command: monitor
 
   
     
