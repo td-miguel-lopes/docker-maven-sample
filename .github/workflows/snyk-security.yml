@@ -46,7 +46,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: monitor 
-          args: --target-reference=${{ github.event.repository.name }} --all-projects
+          args: --target-reference=${{ github.event.repository.name }}:master --all-projects
       - name: Build the Docker image
         run: docker build --file Dockerfile -t docker-maven-sample:latest .
       - name: Run Snyk to check Docker image for vulnerabilities
@@ -55,7 +55,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: docker-maven-sample:latest
+          image: docker-maven-sample:latest --target-reference=${{ github.event.repository.name }}:master
           args: --file=Dockerfile
           command: monitor
       
