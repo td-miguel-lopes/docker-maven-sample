@@ -55,8 +55,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: docker-maven-sample:latest --target-reference=${{ github.event.repository.name }}:master
-          args: --file=Dockerfile
+          image: docker-maven-sample:latest 
+          args: --file=Dockerfile --target-reference=${{ github.event.repository.name }}:master
           command: monitor
       
 
