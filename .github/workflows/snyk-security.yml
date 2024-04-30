@@ -57,7 +57,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: docker-maven-sample:latest 
-          args: --file=Dockerfile --target-reference=${{ github.event.repository.name }}:master
+          args: --file=Dockerfile --exclude-app-vulns --project-name="$(git branch --show-current)"
           command: monitor
       
 
