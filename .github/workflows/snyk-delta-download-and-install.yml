@@ -21,8 +21,8 @@ jobs:
 
     - name: Verify SHA-256 Checksum
       run: |
-        echo "7ba0e8a2ab6b6223790549c8430b8e94559be89f9c9b4e60f19915b72c3b7992  snyk-delta-linux" > snyk-delta-linux.sha256
-        sha256sum -c snyk-delta-linux.sha256
+        echo "7ba0e8a2ab6b6223790549c8430b8e94559be89f9c9b4e60f19915b72c3b7992  snyk-delta" > snyk-delta.sha256
+        sha256sum -c snyk-delta.sha256
    
     
     - name: Make Snyk Delta executable
