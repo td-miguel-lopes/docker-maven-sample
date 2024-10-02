@@ -2,11 +2,10 @@ name: Download and Install Snyk Delta
 
 on:
   push:
-    branches:
-      - main
+    branches: ["master" ]
   pull_request:
-    branches:
-      - main
+    branches: ["master"]
+
 
 jobs:
   download-and-install:
