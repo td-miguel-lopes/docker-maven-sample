@@ -18,6 +18,11 @@ jobs:
     - name: Download Snyk Delta
       run: wget https://github.com/snyk-tech-services/snyk-delta/releases/download/v1.12.0/snyk-delta-linux -O snyk-delta
 
+   - name: Verify SHA-256 Checksum
+     run: |
+        echo "43d1d000a23445c88b8ee65ca5abd886  snyk-delta" > snyk-delta.sha256
+        sha256sum -c snyk-delta.sha256
+    
     - name: Make Snyk Delta executable
       run: chmod +x snyk-delta
 
