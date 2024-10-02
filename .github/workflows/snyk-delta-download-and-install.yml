@@ -1,0 +1,29 @@
+name: Download and Install Snyk Delta
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  download-and-install:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Download Snyk Delta
+      run: wget https://github.com/snyk-tech-services/snyk-delta/releases/download/v1.12.0/snyk-delta-linux -O snyk-delta
+
+    - name: Make Snyk Delta executable
+      run: chmod +x snyk-delta
+
+    - name: Move Snyk Delta to /usr/local/bin
+      run: sudo mv snyk-delta /usr/local/bin/snyk-delta
+
+    - name: Verify Installation
+      run: snyk-delta --version
