@@ -28,6 +28,25 @@ permissions:
   contents: read
 
 jobs:
+
+  download-and-install:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Download Snyk Delta
+      run: wget https://github.com/snyk-tech-services/snyk-delta/releases/download/v1.12.0/snyk-delta-linux -O snyk-delta
+    - name: Verify SHA-256 Checksum
+      run: |
+        echo "7ba0e8a2ab6b6223790549c8430b8e94559be89f9c9b4e60f19915b72c3b7992  snyk-delta" > snyk-delta.sha256
+        sha256sum -c snyk-delta.sha256
+    - name: Make Snyk Delta executable
+      run: chmod +x snyk-delta
+    - name: Move Snyk Delta to /usr/local/bin
+      run: sudo mv snyk-delta /usr/local/bin/snyk-delta
+    - name: Verify Installation
+      run: snyk-delta --version
+
   build:
     runs-on: ubuntu-latest
     steps:
