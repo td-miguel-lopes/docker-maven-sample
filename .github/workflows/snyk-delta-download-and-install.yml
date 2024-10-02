@@ -1,7 +1,13 @@
 name: Download and Install Snyk Delta
 
 on:
-
+  workflow_call:
+    inputs:
+      base_snyk:
+        description: 'Base Snyk URL'
+        required: false
+        type: string
+        
 jobs:
   download-and-install:
     runs-on: ubuntu-latest
