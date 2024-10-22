@@ -52,7 +52,7 @@ jobs:
           args: --target-reference="1.2.3" --all-projects
         #Container build
       - name: Build the Docker image
-        run: docker build --file Dockerfile -t docker-maven-sample:latest .
+        run: docker build --file Dockerfile -t docker-maven-sample:1.2.3 .
         #Container scanning
       - name: Run Snyk to check Docker image for vulnerabilities
         uses: snyk/actions/docker@master
@@ -60,8 +60,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: docker-maven-sample:latest 
-          args: --file=Dockerfile --exclude-app-vulns --project-name="$(git branch --show-current)"
+          image: docker-maven-sample:1.2.3 
+          args: --file=Dockerfile --exclude-app-vulns --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95 --target-reference=1.2.3
           command: monitor
       
 
