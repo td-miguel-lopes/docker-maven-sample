@@ -61,8 +61,8 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: docker-maven-sample:1.2.3 
-          args: --file=Dockerfile --exclude-app-vulns --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95 --target-reference=1.2.3
-          command: container monitor --tags=repository=docker-maven-sample,tag=1.2.3 --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95
+          args: --file=Dockerfile --exclude-app-vulns --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95 --target-reference=1.2.3 --tags=repository=docker-maven-sample,tag=1.2.3
+          command: container monitor 
       
 
   
