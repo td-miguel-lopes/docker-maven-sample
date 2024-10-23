@@ -42,9 +42,9 @@ jobs:
           command: code test
           args: --report --project-name="project" --target-name="1.2.3" --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95
          #Applicational analysis (GATE)          
-      - name: Set up Snyk CLI to check for security issues
+      - name: Gate for Applicational Issues
         uses: snyk/actions/maven-3-jdk-11@master
-        continue-on-error: true # To make sure that SARIF upload gets called
+        continue-on-error: false # To make sure that SARIF upload gets called
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
