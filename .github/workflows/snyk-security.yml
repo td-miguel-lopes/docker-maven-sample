@@ -49,7 +49,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: monitor 
-          args: --target-reference="1.2.3" --all-projects --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95
+          args: --target-reference="1.2.3" --all-projects --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95 --tags=repository=docker-maven-sample,tag=1.2.3
         #Container build
       - name: Build the Docker image
         run: docker build --file Dockerfile -t docker-maven-sample:1.2.3 .
@@ -62,7 +62,7 @@ jobs:
         with:
           image: docker-maven-sample:1.2.3 
           args: --file=Dockerfile --exclude-app-vulns --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95 --target-reference=1.2.3
-          command: container monitor 
+          command: container monitor --tags=repository=docker-maven-sample,tag=1.2.3 --org=f1fc1cd7-30ef-4b2d-9ff5-51eb62b99a95
       
 
   
